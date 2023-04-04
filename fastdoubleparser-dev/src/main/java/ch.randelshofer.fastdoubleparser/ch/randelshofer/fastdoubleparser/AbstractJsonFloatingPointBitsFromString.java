@@ -1,11 +1,11 @@
 /*
- * @(#)AbstractJsonFloatingPointBitsFromCharSequence.java
+ * @(#)AbstractJsonFloatingPointBitsFromString.java
  * Copyright © 2023 Werner Randelshofer, Switzerland. MIT License.
  */
 package ch.randelshofer.fastdoubleparser;
 
 /**
- * Parses a JSON {@code number} from a {@link CharSequence}.
+ * Parses a JSON {@code number} from a {@link String}.
  * <p>
  * This class should have a type parameter for the return value of its parse
  * methods. Unfortunately Java does not support type parameters for primitive
@@ -14,7 +14,7 @@ package ch.randelshofer.fastdoubleparser;
  * <p>
  * See {@link JsonDoubleParser} for the grammar of {@code Number}.
  */
-abstract class AbstractJsonFloatingPointBitsFromCharSequence extends AbstractFloatValueParser {
+abstract class AbstractJsonFloatingPointBitsFromString extends AbstractFloatValueParser {
 
     /**
      * Parses a {@code number} production.
@@ -27,7 +27,7 @@ abstract class AbstractJsonFloatingPointBitsFromCharSequence extends AbstractFlo
      * @return the bit pattern of the parsed value, if the input is legal;
      * otherwise, {@code -1L}.
      */
-    public final long parseNumber(CharSequence str, int offset, int length) {
+    public final long parseNumber(String str, int offset, int length) {
         final int endIndex = offset + length;
         if (offset < 0 || endIndex < offset || endIndex > str.length() || length > MAX_INPUT_LENGTH) {
             throw new IllegalArgumentException(ILLEGAL_OFFSET_OR_ILLEGAL_LENGTH);
@@ -175,7 +175,7 @@ abstract class AbstractJsonFloatingPointBitsFromCharSequence extends AbstractFlo
      * otherwise, {@code -1L}.
      */
     abstract long valueOfFloatLiteral(
-            CharSequence str, int startIndex, int endIndex,
+            String str, int startIndex, int endIndex,
             boolean isNegative, long significand, int exponent,
             boolean isSignificandTruncated, int exponentOfTruncatedSignificand);
 }

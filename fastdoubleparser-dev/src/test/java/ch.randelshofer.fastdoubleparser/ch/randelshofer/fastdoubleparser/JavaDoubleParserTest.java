@@ -29,19 +29,19 @@ public class JavaDoubleParserTest extends AbstractJavaDoubleParserTest {
                 .filter(t -> t.charLength() == t.input().length()
                         && t.charOffset() == 0)
                 .map(t -> dynamicTest(t.title(),
-                        () -> test(t, u -> JavaDoubleParser.parseDouble(u.input()))));
+                        () -> test(t, u -> JavaDoubleParser.parseDouble(u.input().toString()))));
     }
 
     @TestFactory
     public Stream<DynamicNode> dynamicTests_parseDouble_CharSequence_int_int() {
         return createRegularDoubleTestData().stream()
                 .map(t -> dynamicTest(t.title(),
-                        () -> test(t, u -> JavaDoubleParser.parseDouble(u.input(), u.charOffset(), u.charLength()))));
+                        () -> test(t, u -> JavaDoubleParser.parseDouble(u.input().toString(), u.charOffset(), u.charLength()))));
     }
 
     @TestFactory
     public Stream<DynamicNode> dynamicTests_parseDouble_CharSequence_int_int_longRunningTests() {
-        ToDoubleFunction<NumberTestData> lambda = u -> JavaDoubleParser.parseDouble(u.input(), u.charOffset(), u.charLength());
+        ToDoubleFunction<NumberTestData> lambda = u -> JavaDoubleParser.parseDouble(u.input().toString(), u.charOffset(), u.charLength());
         return Stream.concat(
                 getSupplementalTestDataFiles()
                         .map(t -> dynamicTest(t.getFileName().toString(),

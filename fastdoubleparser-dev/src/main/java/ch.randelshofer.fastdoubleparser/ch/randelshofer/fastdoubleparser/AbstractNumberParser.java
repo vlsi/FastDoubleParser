@@ -90,7 +90,7 @@ abstract class AbstractNumberParser {
      * @param endIndex the end index
      * @return the character or 0
      */
-    protected static char charAt(CharSequence str, int i, int endIndex) {
+    protected static char charAt(String str, int i, int endIndex) {
         return i < endIndex ? str.charAt(i) : 0;
     }
 

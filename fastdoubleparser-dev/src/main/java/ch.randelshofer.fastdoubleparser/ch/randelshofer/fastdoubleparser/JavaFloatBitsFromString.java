@@ -1,19 +1,19 @@
 /*
- * @(#)JavaFloatBitsFromCharSequence.java
+ * @(#)JavaFloatBitsFromString.java
  * Copyright © 2023 Werner Randelshofer, Switzerland. MIT License.
  */
 package ch.randelshofer.fastdoubleparser;
 
 /**
- * Parses a {@code float} from a {@link CharSequence}.
+ * Parses a {@code float} from a {@link String}.
  */
-final class JavaFloatBitsFromCharSequence extends AbstractJavaFloatingPointBitsFromCharSequence {
+final class JavaFloatBitsFromString extends AbstractJavaFloatingPointBitsFromString {
 
 
     /**
      * Creates a new instance.
      */
-    public JavaFloatBitsFromCharSequence() {
+    public JavaFloatBitsFromString() {
 
     }
 
@@ -33,7 +33,7 @@ final class JavaFloatBitsFromCharSequence extends AbstractJavaFloatingPointBitsF
     }
 
     @Override
-    long valueOfFloatLiteral(CharSequence str, int startIndex, int endIndex, boolean isNegative,
+    long valueOfFloatLiteral(String str, int startIndex, int endIndex, boolean isNegative,
                              long significand, int exponent, boolean isSignificandTruncated,
                              int exponentOfTruncatedSignificand) {
         float d = FastFloatMath.decFloatLiteralToFloat(isNegative, significand, exponent, isSignificandTruncated, exponentOfTruncatedSignificand);
@@ -42,7 +42,7 @@ final class JavaFloatBitsFromCharSequence extends AbstractJavaFloatingPointBitsF
 
     @Override
     long valueOfHexLiteral(
-            CharSequence str, int startIndex, int endIndex, boolean isNegative, long significand, int exponent,
+            String str, int startIndex, int endIndex, boolean isNegative, long significand, int exponent,
             boolean isSignificandTruncated, int exponentOfTruncatedSignificand) {
         float d = FastFloatMath.hexFloatLiteralToFloat(isNegative, significand, exponent, isSignificandTruncated, exponentOfTruncatedSignificand);
         return Float.floatToRawIntBits(Float.isNaN(d) ? Float.parseFloat(str.subSequence(startIndex, endIndex).toString()) : d);

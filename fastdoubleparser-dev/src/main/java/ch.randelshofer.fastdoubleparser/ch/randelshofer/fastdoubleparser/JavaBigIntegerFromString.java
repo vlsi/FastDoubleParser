@@ -1,5 +1,5 @@
 /*
- * @(#)JavaBigIntegerFromCharSequence.java
+ * @(#)JavaBigIntegerFromString.java
  * Copyright © 2023 Werner Randelshofer, Switzerland. MIT License.
  */
 package ch.randelshofer.fastdoubleparser;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static ch.randelshofer.fastdoubleparser.FastIntegerMath.fillPowersOf10Floor16;
 
-class JavaBigIntegerFromCharSequence extends AbstractNumberParser {
+class JavaBigIntegerFromString extends AbstractNumberParser {
     public final static int MAX_INPUT_LENGTH = 1_292_782_622;
     /**
      * The resulting value must fit into {@code 2^31 - 1} bits.
@@ -28,7 +28,7 @@ class JavaBigIntegerFromCharSequence extends AbstractNumberParser {
      * @return result (always non-null)
      * @throws NumberFormatException if parsing fails
      */
-    public BigInteger parseBigIntegerLiteral(CharSequence str, int offset, int length, int radix)
+    public BigInteger parseBigIntegerLiteral(String str, int offset, int length, int radix)
             throws NumberFormatException {
         try {
             final int endIndex = offset + length;
@@ -62,7 +62,7 @@ class JavaBigIntegerFromCharSequence extends AbstractNumberParser {
         }
     }
 
-    private BigInteger parseDecDigits(CharSequence str, int from, int to, boolean isNegative) {
+    private BigInteger parseDecDigits(String str, int from, int to, boolean isNegative) {
         int numDigits = to - from;
         if (numDigits > 18) {
             return parseManyDecDigits(str, from, to, isNegative);
@@ -81,7 +81,7 @@ class JavaBigIntegerFromCharSequence extends AbstractNumberParser {
         return BigInteger.valueOf(isNegative ? -significand : significand);
     }
 
-    private BigInteger parseHexDigits(CharSequence str, int from, int to, boolean isNegative) {
+    private BigInteger parseHexDigits(String str, int from, int to, boolean isNegative) {
         from = skipZeroes(str, from, to);
         int numDigits = to - from;
         if (numDigits <= 0) {
@@ -120,18 +120,18 @@ class JavaBigIntegerFromCharSequence extends AbstractNumberParser {
         return isNegative ? result.negate() : result;
     }
 
-    private BigInteger parseManyDecDigits(CharSequence str, int from, int to, boolean isNegative) {
+    private BigInteger parseManyDecDigits(String str, int from, int to, boolean isNegative) {
         from = skipZeroes(str, from, to);
         int numDigits = to - from;
         if (numDigits > MAX_DECIMAL_DIGITS) {
             throw new NumberFormatException(VALUE_EXCEEDS_LIMITS);
         }
         Map<Integer, BigInteger> powersOfTen = fillPowersOf10Floor16(from, to);
-        BigInteger result = ParseDigitsTaskCharSequence.parseDigitsRecursive(str, from, to, powersOfTen);
+        BigInteger result = ParseDigitsTaskString.parseDigitsRecursive(str, from, to, powersOfTen);
         return isNegative ? result.negate() : result;
     }
 
-    private int skipZeroes(CharSequence str, int from, int to) {
+    private int skipZeroes(String str, int from, int to) {
         while (from < to && str.charAt(from) == '0') from++;
         return from;
     }

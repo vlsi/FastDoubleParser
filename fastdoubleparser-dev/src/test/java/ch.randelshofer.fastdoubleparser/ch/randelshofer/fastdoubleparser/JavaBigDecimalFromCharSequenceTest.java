@@ -32,7 +32,7 @@ public class JavaBigDecimalFromCharSequenceTest extends AbstractBigDecimalParser
         return createRegularTestData().stream()
                 .map(t -> dynamicTest(t.title(),
                         () -> test(t, u -> JavaBigDecimalParser.parseBigDecimal(
-                                u.input(),
+                                u.input().toString(),
                                 u.charOffset(), u.charLength()))));
     }
 
@@ -41,7 +41,7 @@ public class JavaBigDecimalFromCharSequenceTest extends AbstractBigDecimalParser
         return createLongRunningTestData().stream()
                 .map(t -> dynamicTest(t.title(),
                         () -> test(t, u -> JavaBigDecimalParser.parseBigDecimal(
-                                u.input(),
+                                u.input().toString(),
                                 u.charOffset(), u.charLength()))));
     }
 

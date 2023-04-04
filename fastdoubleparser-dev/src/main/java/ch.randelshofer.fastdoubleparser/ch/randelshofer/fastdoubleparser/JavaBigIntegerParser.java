@@ -59,7 +59,7 @@ public class JavaBigIntegerParser {
 
     private static final JavaBigIntegerFromCharArray CHAR_ARRAY_PARSER = new JavaBigIntegerFromCharArray();
 
-    private static final JavaBigIntegerFromCharSequence CHAR_SEQUENCE_PARSER = new JavaBigIntegerFromCharSequence();
+    private static final JavaBigIntegerFromString CHAR_SEQUENCE_PARSER = new JavaBigIntegerFromString();
 
     /**
      * Don't let anyone instantiate this class.
@@ -68,19 +68,19 @@ public class JavaBigIntegerParser {
     }
 
     /**
-     * Convenience method for calling {@link #parseBigInteger(CharSequence, int, int)}.
+     * Convenience method for calling {@link #parseBigInteger(String, int, int)}.
      *
      * @param str the string to be parsed
      * @return the parsed value
      * @throws NullPointerException  if the string is null
      * @throws NumberFormatException if the string can not be parsed successfully
      */
-    public static BigInteger parseBigInteger(CharSequence str) {
+    public static BigInteger parseBigInteger(String str) {
         return CHAR_SEQUENCE_PARSER.parseBigIntegerLiteral(str, 0, str.length(), 10);
     }
 
     /**
-     * Convenience method for calling {@link #parseBigInteger(CharSequence, int, int, int)}.
+     * Convenience method for calling {@link #parseBigInteger(String, int, int, int)}.
      *
      * @param str   the string to be parsed
      * @param radix the radix to be used in interpreting the {@code str}
@@ -88,12 +88,12 @@ public class JavaBigIntegerParser {
      * @throws NullPointerException  if the string is null
      * @throws NumberFormatException if the string can not be parsed successfully
      */
-    public static BigInteger parseBigInteger(CharSequence str, int radix) {
+    public static BigInteger parseBigInteger(String str, int radix) {
         return CHAR_SEQUENCE_PARSER.parseBigIntegerLiteral(str, 0, str.length(), radix);
     }
 
     /**
-     * Convenience method for calling {@link #parseBigInteger(CharSequence, int, int, int)}.
+     * Convenience method for calling {@link #parseBigInteger(String, int, int, int)}.
      *
      * @param str    the string to be parsed
      * @param offset The index of the first character to parse
@@ -103,12 +103,12 @@ public class JavaBigIntegerParser {
      * @throws IllegalArgumentException if offset or length are illegal
      * @throws NumberFormatException    if the string can not be parsed successfully
      */
-    public static BigInteger parseBigInteger(CharSequence str, int offset, int length) {
+    public static BigInteger parseBigInteger(String str, int offset, int length) {
         return CHAR_SEQUENCE_PARSER.parseBigIntegerLiteral(str, offset, length, 10);
     }
 
     /**
-     * Parses a {@code BigIntegerLiteral} from a {@link CharSequence} and converts it
+     * Parses a {@code BigIntegerLiteral} from a {@link String} and converts it
      * into a {@link BigInteger} value.
      *
      * @param str    the string to be parsed
@@ -120,7 +120,7 @@ public class JavaBigIntegerParser {
      * @throws IllegalArgumentException if offset or length are illegal
      * @throws NumberFormatException    if the string can not be parsed successfully
      */
-    public static BigInteger parseBigInteger(CharSequence str, int offset, int length, int radix) {
+    public static BigInteger parseBigInteger(String str, int offset, int length, int radix) {
         return CHAR_SEQUENCE_PARSER.parseBigIntegerLiteral(str, offset, length, radix);
     }
 

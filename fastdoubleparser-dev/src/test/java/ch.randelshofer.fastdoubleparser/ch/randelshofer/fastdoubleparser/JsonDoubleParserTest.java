@@ -31,19 +31,19 @@ public class JsonDoubleParserTest extends AbstractJsonDoubleParserTest {
                         && t.charLength() <= EXPECTED_MAX_INPUT_LENGTH
                         && t.charOffset() == 0)
                 .map(t -> dynamicTest(t.title(),
-                        () -> test(t, u -> JsonDoubleParser.parseDouble(u.input()))));
+                        () -> test(t, u -> JsonDoubleParser.parseDouble(u.input().toString()))));
     }
 
     @TestFactory
     public Stream<DynamicNode> dynamicTests_parseDouble_CharSequence_int_int() {
         return createRegularTestData().stream()
                 .map(t -> dynamicTest(t.title(),
-                        () -> test(t, u -> JsonDoubleParser.parseDouble(u.input(), u.charOffset(), u.charLength()))));
+                        () -> test(t, u -> JsonDoubleParser.parseDouble(u.input().toString(), u.charOffset(), u.charLength()))));
     }
 
     @TestFactory
     public Stream<DynamicNode> dynamicTests_parseDouble_CharSequence_int_int_longRunningTest() {
-        ToDoubleFunction<NumberTestData> lambda = u -> JsonDoubleParser.parseDouble((u.input()), u.charOffset(), u.charLength());
+        ToDoubleFunction<NumberTestData> lambda = u -> JsonDoubleParser.parseDouble((u.input().toString()), u.charOffset(), u.charLength());
         return Stream.concat(
                 getSupplementalTestDataFiles()
                         .map(t -> dynamicTest(t.getFileName().toString(),

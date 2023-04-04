@@ -103,7 +103,7 @@ public class JavaBigDecimalParser {
 
     private static final JavaBigDecimalFromCharArray CHAR_ARRAY_PARSER = new JavaBigDecimalFromCharArray();
 
-    private static final JavaBigDecimalFromCharSequence CHAR_SEQUENCE_PARSER = new JavaBigDecimalFromCharSequence();
+    private static final JavaBigDecimalFromString CHAR_SEQUENCE_PARSER = new JavaBigDecimalFromString();
 
     /**
      * Don't let anyone instantiate this class.
@@ -113,19 +113,19 @@ public class JavaBigDecimalParser {
     }
 
     /**
-     * Convenience method for calling {@link #parseBigDecimal(CharSequence, int, int)}.
+     * Convenience method for calling {@link #parseBigDecimal(String, int, int)}.
      *
      * @param str the string to be parsed
      * @return the parsed value
      * @throws NullPointerException  if the string is null
      * @throws NumberFormatException if the string can not be parsed successfully
      */
-    public static BigDecimal parseBigDecimal(CharSequence str) throws NumberFormatException {
+    public static BigDecimal parseBigDecimal(String str) throws NumberFormatException {
         return parseBigDecimal(str, 0, str.length());
     }
 
     /**
-     * Parses a {@code FloatingPointLiteral} from a {@link CharSequence} and converts it
+     * Parses a {@code FloatingPointLiteral} from a {@link String} and converts it
      * into a {@link BigDecimal} value.
      *
      * @param str    the string to be parsed
@@ -136,7 +136,7 @@ public class JavaBigDecimalParser {
      * @throws IllegalArgumentException if offset or length are illegal
      * @throws NumberFormatException    if the string can not be parsed successfully
      */
-    public static BigDecimal parseBigDecimal(CharSequence str, int offset, int length) throws NumberFormatException {
+    public static BigDecimal parseBigDecimal(String str, int offset, int length) throws NumberFormatException {
         return CHAR_SEQUENCE_PARSER.parseBigDecimalString(str, offset, length);
     }
 

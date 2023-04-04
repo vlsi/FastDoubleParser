@@ -23,7 +23,7 @@ public class JavaBigIntegerFromCharSequenceTest extends AbstractBigIntegerParser
                             && t.radix() == 10;
                 })
                 .map(t -> dynamicTest(t.title(),
-                        () -> test(t, u -> JavaBigIntegerParser.parseBigInteger(u.input()))));
+                        () -> test(t, u -> JavaBigIntegerParser.parseBigInteger(u.input().toString()))));
 
     }
 
@@ -36,7 +36,7 @@ public class JavaBigIntegerFromCharSequenceTest extends AbstractBigIntegerParser
                             && t.charOffset() == 0;
                 })
                 .map(t -> dynamicTest(t.title(),
-                        () -> test(t, u -> JavaBigIntegerParser.parseBigInteger(u.input(),
+                        () -> test(t, u -> JavaBigIntegerParser.parseBigInteger(u.input().toString(),
                                 u.radix()))));
 
     }
@@ -49,7 +49,7 @@ public class JavaBigIntegerFromCharSequenceTest extends AbstractBigIntegerParser
                     return t.radix() == 10;
                 })
                 .map(t -> dynamicTest(t.title(),
-                        () -> test(t, u -> JavaBigIntegerParser.parseBigInteger(u.input(), u.charOffset(), u.charLength()))));
+                        () -> test(t, u -> JavaBigIntegerParser.parseBigInteger(u.input().toString(), u.charOffset(), u.charLength()))));
 
     }
 
@@ -57,7 +57,7 @@ public class JavaBigIntegerFromCharSequenceTest extends AbstractBigIntegerParser
     public Stream<DynamicTest> dynamicTests_parseBigInteger_CharSequence_int_int_int() {
         return createTestData().stream()
                 .map(t -> dynamicTest(t.title(),
-                        () -> test(t, u -> JavaBigIntegerParser.parseBigInteger(u.input(), u.charOffset(), u.charLength(), u.radix()))));
+                        () -> test(t, u -> JavaBigIntegerParser.parseBigInteger(u.input().toString(), u.charOffset(), u.charLength(), u.radix()))));
 
     }
 
@@ -65,7 +65,7 @@ public class JavaBigIntegerFromCharSequenceTest extends AbstractBigIntegerParser
     public Stream<DynamicTest> dynamicTests_parseBigInteger_CharSequence_int_int_int_longRunningTests() {
         return createLongRunningTestData().stream()
                 .map(t -> dynamicTest(t.title(),
-                        () -> test(t, u -> JavaBigIntegerParser.parseBigInteger(u.input(), u.charOffset(), u.charLength(), u.radix()))));
+                        () -> test(t, u -> JavaBigIntegerParser.parseBigInteger(u.input().toString(), u.charOffset(), u.charLength(), u.radix()))));
 
     }
 }

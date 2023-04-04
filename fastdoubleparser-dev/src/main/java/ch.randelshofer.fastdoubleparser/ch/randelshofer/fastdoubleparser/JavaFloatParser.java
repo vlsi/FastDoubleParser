@@ -31,7 +31,7 @@ public class JavaFloatParser {
 
     private static final JavaFloatBitsFromCharArray CHAR_ARRAY_PARSER = new JavaFloatBitsFromCharArray();
 
-    private static final JavaFloatBitsFromCharSequence CHAR_SEQUENCE_PARSER = new JavaFloatBitsFromCharSequence();
+    private static final JavaFloatBitsFromString CHAR_SEQUENCE_PARSER = new JavaFloatBitsFromString();
 
     /**
      * Don't let anyone instantiate this class.
@@ -41,19 +41,19 @@ public class JavaFloatParser {
     }
 
     /**
-     * Convenience method for calling {@link #parseFloat(CharSequence, int, int)}.
+     * Convenience method for calling {@link #parseFloat(String, int, int)}.
      *
      * @param str the string to be parsed
      * @return the parsed value
      * @throws NullPointerException  if the string is null
      * @throws NumberFormatException if the string can not be parsed successfully
      */
-    public static float parseFloat(CharSequence str) throws NumberFormatException {
+    public static float parseFloat(String str) throws NumberFormatException {
         return parseFloat(str, 0, str.length());
     }
 
     /**
-     * Parses a {@code FloatingPointLiteral} from a {@link CharSequence} and converts it
+     * Parses a {@code FloatingPointLiteral} from a {@link String} and converts it
      * into a {@code float} value.
      *
      * @param str    the string to be parsed
@@ -64,7 +64,7 @@ public class JavaFloatParser {
      * @throws IllegalArgumentException if offset or length are illegal
      * @throws NumberFormatException    if the string can not be parsed successfully
      */
-    public static float parseFloat(CharSequence str, int offset, int length) throws NumberFormatException {
+    public static float parseFloat(String str, int offset, int length) throws NumberFormatException {
         long bitPattern = CHAR_SEQUENCE_PARSER.parseFloatingPointLiteral(str, offset, length);
         return Float.intBitsToFloat((int) bitPattern);
     }

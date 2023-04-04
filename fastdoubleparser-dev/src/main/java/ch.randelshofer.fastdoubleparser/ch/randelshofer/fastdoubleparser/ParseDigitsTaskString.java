@@ -1,5 +1,5 @@
 /*
- * @(#)ParseDigitsTaskCharSequence.java
+ * @(#)ParseDigitsTaskString.java
  * Copyright © 2023 Werner Randelshofer, Switzerland. MIT License.
  */
 package ch.randelshofer.fastdoubleparser;
@@ -13,11 +13,11 @@ import static ch.randelshofer.fastdoubleparser.FastIntegerMath.splitFloor16;
 /**
  * Parses digits in exponential time O(e^n).
  */
-class ParseDigitsTaskCharSequence {
+class ParseDigitsTaskString {
     /**
      * Don't let anyone instantiate this class.
      */
-    private ParseDigitsTaskCharSequence() {
+    private ParseDigitsTaskString() {
     }
 
     /**
@@ -40,7 +40,7 @@ class ParseDigitsTaskCharSequence {
     /**
      * Parses digits in quadratic time O(N<sup>2</sup>).
      */
-    static BigInteger parseDigitsIterative(CharSequence str, int from, int to) {
+    static BigInteger parseDigitsIterative(String str, int from, int to) {
         int numDigits = to - from;
 
         BigSignificand bigSignificand = new BigSignificand(FastIntegerMath.estimateNumBits(numDigits));
@@ -66,7 +66,7 @@ class ParseDigitsTaskCharSequence {
      * We achieve better performance by performing multiplications of long bit sequences
      * in the frequencey domain.
      */
-    static BigInteger parseDigitsRecursive(CharSequence str, int from, int to, Map<Integer, BigInteger> powersOfTen) {
+    static BigInteger parseDigitsRecursive(String str, int from, int to, Map<Integer, BigInteger> powersOfTen) {
         // Base case: All sequences of 18 or fewer digits fit into a long.
         int numDigits = to - from;
 

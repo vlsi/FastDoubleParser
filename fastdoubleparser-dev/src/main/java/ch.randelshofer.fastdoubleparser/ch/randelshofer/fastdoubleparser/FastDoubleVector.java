@@ -53,7 +53,7 @@ class FastDoubleVector {
      * @param offset the index of the first character in the character sequence
      * @return the parsed digits or -1
      */
-    public static int tryToParseEightDigits(CharSequence str, int offset) {
+    public static int tryToParseEightDigits(String str, int offset) {
         // Performance: We extract the chars in two steps so that we
         //              can benefit from out of order execution in the CPU.
         long first = str.charAt(offset)

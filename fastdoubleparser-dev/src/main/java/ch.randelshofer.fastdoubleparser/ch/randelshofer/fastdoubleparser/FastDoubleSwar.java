@@ -98,7 +98,7 @@ class FastDoubleSwar {
         return isEightDigitsUtf16(first, second);
     }
 
-    public static boolean isEightDigits(CharSequence a, int offset) {
+    public static boolean isEightDigits(String a, int offset) {
         boolean success = true;
         for (int i = 0; i < 8; i++) {
             char ch = a.charAt(i + offset);
@@ -130,7 +130,7 @@ class FastDoubleSwar {
         return isEightZeroesUtf8((long) readLongLE.get(a, offset));
     }
 
-    public static boolean isEightZeroes(CharSequence a, int offset) {
+    public static boolean isEightZeroes(String a, int offset) {
         boolean success = true;
         for (int i = 0; i < 8; i++) {
             success &= '0' == a.charAt(i + offset);
@@ -211,7 +211,7 @@ class FastDoubleSwar {
      * @param offset the index of the first character in the character sequence
      * @return the parsed digits or -1
      */
-    public static int tryToParseEightDigits(CharSequence str, int offset) {
+    public static int tryToParseEightDigits(String str, int offset) {
         long first = str.charAt(offset)
                 | (long) str.charAt(offset + 1) << 16
                 | (long) str.charAt(offset + 2) << 32
@@ -316,7 +316,7 @@ class FastDoubleSwar {
      * @param offset the index of the first character in the character sequence
      * @return the parsed digits or -1
      */
-    public static long tryToParseEightHexDigits(CharSequence str, int offset) {
+    public static long tryToParseEightHexDigits(String str, int offset) {
         long first = (long) str.charAt(offset) << 48
                 | (long) str.charAt(offset + 1) << 32
                 | (long) str.charAt(offset + 2) << 16
@@ -451,7 +451,7 @@ class FastDoubleSwar {
         return FastDoubleSwar.tryToParseFourDigitsUtf16(first);
     }
 
-    public static int tryToParseFourDigits(CharSequence str, int offset) {
+    public static int tryToParseFourDigits(String str, int offset) {
         long first = str.charAt(offset)
                 | (long) str.charAt(offset + 1) << 16
                 | (long) str.charAt(offset + 2) << 32
@@ -516,7 +516,7 @@ class FastDoubleSwar {
         return success ? result : -1;
     }
 
-    public static int tryToParseUpTo7Digits(CharSequence str, int from, int to) {
+    public static int tryToParseUpTo7Digits(String str, int from, int to) {
         int result = 0;
         boolean success = true;
         for (; from < to; from++) {

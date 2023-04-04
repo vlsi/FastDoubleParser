@@ -1,11 +1,11 @@
 /*
- * @(#)AbstractJavaFloatingPointBitsFromCharSequence.java
+ * @(#)AbstractJavaFloatingPointBitsFromString.java
  * Copyright © 2023 Werner Randelshofer, Switzerland. MIT License.
  */
 package ch.randelshofer.fastdoubleparser;
 
 /**
- * Parses a Java {@code FloatingPointLiteral} from a {@link CharSequence}.
+ * Parses a Java {@code FloatingPointLiteral} from a {@link String}.
  * <p>
  * This class should have a type parameter for the return value of its parse
  * methods. Unfortunately Java does not support type parameters for primitive
@@ -14,7 +14,7 @@ package ch.randelshofer.fastdoubleparser;
  * <p>
  * See {@link JavaDoubleParser} for the grammar of {@code FloatingPointLiteral}.
  */
-abstract class AbstractJavaFloatingPointBitsFromCharSequence extends AbstractFloatValueParser {
+abstract class AbstractJavaFloatingPointBitsFromString extends AbstractFloatValueParser {
 
     /**
      * Skips optional white space in the provided string
@@ -24,7 +24,7 @@ abstract class AbstractJavaFloatingPointBitsFromCharSequence extends AbstractFlo
      * @param endIndex end index (exclusive) of the optional white space
      * @return index after the optional white space
      */
-    private static int skipWhitespace(CharSequence str, int index, int endIndex) {
+    private static int skipWhitespace(String str, int index, int endIndex) {
         while (index < endIndex && str.charAt(index) <= ' ') {
             index++;
         }
@@ -65,7 +65,7 @@ abstract class AbstractJavaFloatingPointBitsFromCharSequence extends AbstractFlo
      * @return the bit pattern of the parsed value, if the input is legal;
      * otherwise, {@code -1L}.
      */
-    private long parseDecFloatLiteral(CharSequence str, int index, int startIndex, int endIndex, boolean isNegative, boolean hasLeadingZero) {
+    private long parseDecFloatLiteral(String str, int index, int startIndex, int endIndex, boolean isNegative, boolean hasLeadingZero) {
         // Parse significand
         // -----------------
         // Note: a multiplication by a constant is cheaper than an
@@ -193,7 +193,7 @@ abstract class AbstractJavaFloatingPointBitsFromCharSequence extends AbstractFlo
      * @return the bit pattern of the parsed value, if the input is legal;
      * otherwise, {@code -1L}.
      */
-    public final long parseFloatingPointLiteral(CharSequence str, int offset, int length) {
+    public final long parseFloatingPointLiteral(String str, int offset, int length) {
         final int endIndex = offset + length;
         if (offset < 0 || endIndex < offset || endIndex > str.length() || length > MAX_INPUT_LENGTH) {
             throw new IllegalArgumentException(ILLEGAL_OFFSET_OR_ILLEGAL_LENGTH);
@@ -260,7 +260,7 @@ abstract class AbstractJavaFloatingPointBitsFromCharSequence extends AbstractFlo
      * otherwise, {@code -1L}.
      */
     private long parseHexFloatLiteral(
-            CharSequence str, int index, int startIndex, int endIndex, boolean isNegative) {
+            String str, int index, int startIndex, int endIndex, boolean isNegative) {
 
         // Parse HexSignificand
         // ------------
@@ -372,7 +372,7 @@ abstract class AbstractJavaFloatingPointBitsFromCharSequence extends AbstractFlo
     }
 
 
-    private long parseNaNOrInfinity(CharSequence str, int index, int endIndex, boolean isNegative) {
+    private long parseNaNOrInfinity(String str, int index, int endIndex, boolean isNegative) {
         if (str.charAt(index) == 'N') {
             if (index + 2 < endIndex
                     // && str.charAt(index) == 'N'
@@ -429,7 +429,7 @@ abstract class AbstractJavaFloatingPointBitsFromCharSequence extends AbstractFlo
      * otherwise, {@code -1L}.
      */
     abstract long valueOfFloatLiteral(
-            CharSequence str, int startIndex, int endIndex,
+            String str, int startIndex, int endIndex,
             boolean isNegative, long significand, int exponent,
             boolean isSignificandTruncated, int exponentOfTruncatedSignificand);
 
@@ -452,7 +452,7 @@ abstract class AbstractJavaFloatingPointBitsFromCharSequence extends AbstractFlo
      * otherwise, {@code -1L}.
      */
     abstract long valueOfHexLiteral(
-            CharSequence str, int startIndex, int endIndex,
+            String str, int startIndex, int endIndex,
             boolean isNegative, long significand, int exponent,
             boolean isSignificandTruncated, int exponentOfTruncatedSignificand);
 }

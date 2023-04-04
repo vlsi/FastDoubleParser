@@ -30,19 +30,19 @@ public class JavaFloatParserTest extends AbstractJavaFloatParserTest {
                         && t.charLength() <= AbstractFloatValueParser.MAX_INPUT_LENGTH
                         && t.charOffset() == 0)
                 .map(t -> dynamicTest(t.title(),
-                        () -> test(t, u -> JavaFloatParser.parseFloat(u.input()))));
+                        () -> test(t, u -> JavaFloatParser.parseFloat(u.input().toString()))));
     }
 
     @TestFactory
     public Stream<DynamicNode> dynamicTests_parseFloat_CharSequence_Int_Int() {
         return createRegularFloatTestData().stream()
                 .map(t -> dynamicTest(t.title(),
-                        () -> test(t, u -> JavaFloatParser.parseFloat(u.input(), u.charOffset(), u.charLength()))));
+                        () -> test(t, u -> JavaFloatParser.parseFloat(u.input().toString(), u.charOffset(), u.charLength()))));
     }
 
     @TestFactory
     public Stream<DynamicNode> dynamicTests_parseFloat_CharSequence_int_int_longRunningTests() {
-        ToFloatFunction<NumberTestData> lambda = u -> JavaFloatParser.parseFloat((u.input()), u.charOffset(), u.charLength());
+        ToFloatFunction<NumberTestData> lambda = u -> JavaFloatParser.parseFloat((u.input().toString()), u.charOffset(), u.charLength());
         return Stream.concat(
                 getSupplementalTestDataFiles()
                         .map(t -> dynamicTest(t.getFileName().toString(),
